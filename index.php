@@ -31,6 +31,7 @@
             $id = idx($friend, 'id');
             $url = 'https://graph.facebook.com/' . $id . '/picture';
             $img = '/userimages/' . $id . '.jpg';
+            print $url;
             if (file_put_contents($img, file_get_contents($url))) {print "Success";}
         }
 
