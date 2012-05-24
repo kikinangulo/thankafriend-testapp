@@ -1,6 +1,6 @@
 <?php
-
-    require_once("/facebook/facebook.php");
+    
+    require_once("facebook/facebook.php");
 
     require_once('utils.php');
 
@@ -10,9 +10,10 @@
     $config['fileUpload'] = false; // optional
 
     $facebook = new Facebook($config);
-    
+
     $user_id = $facebook->getUser();
     if ($user_id) {
+        print "a";
         try {
             // Fetch the viewer's basic information
             $basic = $facebook->api('/me');
@@ -20,17 +21,20 @@
             // If the call fails we check if we still have a user. The user will be
             // cleared if the error is because of an invalid accesstoken
             if (!$facebook->getUser()) {
-            header('Location: '. AppInfo::getUrl($_SERVER['REQUEST_URI']));
+            header('Location: https://facebook.com');
             exit();
             }
         }
 
         // This fetches 10 of your friends.
         $friends = idx($facebook->api('/me/friends?limit=10'), 'data', array());
-        foreach ($friends as &$friend) {
-                $url = 'https://graph.facebook.com/' . $friend->id . '/picture';
-                $img = '/userimages/' . $friend->id . '.jpg';
-                file_put_contents($img, file_get_contents($url));
+        print_r ($friends);
+        foreach ($friends as $friend) {
+            $id = idx($friend, 'id');
+            $url = 'https://graph.facebook.com/' . $id . '/picture';
+            $img = '/userimages/' . $id . '.jpg';
+            echo 'https://graph.facebook.com/' . $id . '/picture';
+            if (file_put_contents($img, file_get_contents($url))) {print "Success";}
         }
 
     }
