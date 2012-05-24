@@ -1,42 +1,3 @@
-<?php
-    
-    require_once("facebook/facebook.php");
-
-    require_once('utils.php');
-
-    $config = array();
-    $config['appId'] = '390782660963770';
-    $config['secret'] = '378cc6340c90c1e0b4b10c498ff66120';
-    $config['fileUpload'] = false; // optional
-
-    $facebook = new Facebook($config);
-
-    $user_id = $facebook->getUser();
-    if ($user_id) {
-        try {
-            // Fetch the viewer's basic information
-            $basic = $facebook->api('/me');
-        } catch (FacebookApiException $e) {
-            // If the call fails we check if we still have a user. The user will be
-            // cleared if the error is because of an invalid accesstoken
-            if (!$facebook->getUser()) {
-            header('Location: https://facebook.com');
-            exit();
-            }
-        }
-
-        // This fetches 10 of your friends.
-        $friends = idx($facebook->api('/me/friends?limit=10'), 'data', array());
-        foreach ($friends as $friend) {
-            $id = idx($friend, 'id');
-            $url = 'https://graph.facebook.com/' . $id . '/picture';
-            $img = '/userimages/' . $id . '.jpg';
-            print $url;
-            if (file_put_contents($img, file_get_contents($url))) {print "Success";}
-        }
-
-    }
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -77,6 +38,70 @@
 
   <body>
     <div id="fb-root"></div>
+
+	<script>
+      // Load the SDK Asynchronously
+      (function(d){
+         var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//connect.facebook.net/en_US/all.js";
+         ref.parentNode.insertBefore(js, ref);
+       }(document));
+
+      // Init the SDK upon load
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '390782660963770', // App ID
+          channelUrl : '//'+window.location.hostname+'/channel', // Path to your Channel File
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow the server to access the session
+          xfbml      : true,  // parse XFBML
+          oauth      : true,
+        });
+
+        // listen for and handle auth.statusChange events
+        FB.Event.subscribe('auth.statusChange', function(response) {
+          if (response.authResponse) {
+            // user has auth'd your app and is logged into Facebook
+            FB.api('/me', function(me){
+              if (me.name) {
+                document.getElementById('auth-displayname').innerHTML = me.name;
+                document.getElementById('auth-displayname').innerHTML = me.name;
+              }
+            })
+            
+            FB.api('/me/friends', { limit: 10 }, function(response) {
+                if(response.data) {
+                    $.each(response.data,function(index,friend) {
+                        $('#friends').append('<div id="' + friend.id  + '" class="span3"><img class="profile" src="http://graph.facebook.com/' + friend.id + '/picture" /><p>' + friend.name + '</p></div>');
+                    });
+                } else {
+                    alert("Error!");
+                }
+            });
+            
+            document.getElementById('auth-loggedout').style.display = 'none';
+            document.getElementById('auth-loggedin').style.display = 'block';
+            
+          } else {
+            // user has not auth'd your app, or is not logged into Facebook
+            document.getElementById('auth-loggedout').style.display = 'block';
+            document.getElementById('auth-loggedin').style.display = 'none';
+          }
+        });
+
+        // respond to clicks on the login and logout links
+        document.getElementById('auth-loginlink').addEventListener('click', function(){
+          FB.login();
+        });
+        document.getElementById('auth-logoutlink').addEventListener('click', function(){
+          FB.logout();
+        }); 
+      } 
+    </script>
+
+
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -85,12 +110,23 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-            <h1>Test FB Page</h1>
+          Test FB Page
           <div class="nav-collapse">
             <ul class="nav">
 
             </ul>
-
+            <p class="navbar-text pull-right">    
+      			<div id="auth-status" style="padding-top:11px;">
+        			<div id="auth-loggedout">
+          				<a href="#" id="auth-loginlink">Login</a>
+        			</div>
+        			<div id="auth-loggedin" style="display:none; color:#ffffff;">
+          				Hi, <span id="auth-displayname"></span>  
+        				(<a href="#" id="auth-logoutlink">logout</a>)
+      				</div>
+    			</div>
+    		</p>
+          </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
@@ -101,7 +137,7 @@
       <div class="row">
 
         <div class="span12">
-<script src='https://connect.facebook.net/en_US/all.js'></script>
+<script src='http://connect.facebook.net/en_US/all.js'></script>
 
 
           <p></p>
@@ -118,8 +154,8 @@
                 var userId = $(this).attr("id");
                 var obj = {
                     method: 'feed',
-                    link: 'https://high-leaf-9955.herokuapp.com/',
-                    picture: 'https://graph.facebook.com/' + userId + '/picture',
+                    link: 'http://fbtestapp.dev/index.php',
+                    picture: 'http://graph.facebook.com/' + userId + '/picture',
                     name: 'Thank You Friend!',
                     caption: 'I just want to say thank you',
                     description: 'I just want to say thank you'
