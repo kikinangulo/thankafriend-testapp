@@ -146,7 +146,7 @@
 
         </div><!--/span-->
       </div><!--/row-->
-      <button div="invite-friends" class="btn-success" value="Invite Your Friends" ></button>
+      <button id="invite-friends" class="btn-success">Invite Your Friends</button>
       
     <script type="text/javascript">
         $(function(){ 
