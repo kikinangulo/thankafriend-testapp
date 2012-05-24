@@ -73,7 +73,7 @@
             FB.api('/me/friends', { limit: 10 }, function(response) {
                 if(response.data) {
                     $.each(response.data,function(index,friend) {
-                        $('#friends').append('<div id="' + friend.id  + '" class="span3"><img class="profile" src="http://graph.facebook.com/' + friend.id + '/picture" /><p>' + friend.name + '</p></div>');
+                        $('#friends').append('<div id="' + friend.id  + '" class="span3"><img class="profile" src="https://graph.facebook.com/' + friend.id + '/picture" /><p>' + friend.name + '</p></div>');
                     });
                 } else {
                     alert("Error!");
@@ -136,7 +136,7 @@
       <div class="row">
 
         <div class="span12">
-<script src='http://connect.facebook.net/en_US/all.js'></script>
+<script src='https://connect.facebook.net/en_US/all.js'></script>
 
 
           <p></p>
@@ -154,7 +154,7 @@
                 var userId = $(this).attr("id");
                 var obj = {
                     method: 'feed',
-                    link: 'http://apps.facebook.com/mbdevapp/',
+                    link: 'https://apps.facebook.com/mbdevapp/',
                     picture: '',
                     name: 'Thank You Friend!',
                     caption: 'I just want to say thank you',
@@ -175,7 +175,7 @@
                 
 
                 FB.ui({method: 'apprequests',
-                    message: 'My Great Request'
+                    message: 'Howdy friend, I would like you to see my work at Stuzo and thank me for it'
                 }, requestCallback);
                 function requestCallback(response) {
                     // Handle callback here
