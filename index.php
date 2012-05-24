@@ -150,7 +150,7 @@
       
     <script type="text/javascript">
         $(function(){ 
-            $(".profile").live("click",(function() {
+            $(".profile").on("click", function(event) {
                 var userId = $(this).attr("id");
                 var obj = {
                     method: 'feed',
@@ -165,19 +165,19 @@
                 }
 
                 FB.ui(obj, callback);
-            }));
+            });
         });
     </script>
     
         <script type="text/javascript">
         $(function(){ 
-            $("#invite-friends").live("click",(function() {
+            $("#invite-friends").on("click", function(event) {
                 function sendRequestViaMultiFriendSelector() {
                     FB.ui({method: 'apprequests',
                         message: 'My Great Request',
                     }, requestCallback);
                 }
-            }));
+            });
         });
     </script>
     
