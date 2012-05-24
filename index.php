@@ -154,7 +154,7 @@
                 var userId = $(this).attr("id");
                 var obj = {
                     method: 'feed',
-                    link: 'http://fbtestapp.dev/index.php',
+                    link: 'http://apps.facebook.com/mbdevapp/',
                     picture: '',
                     name: 'Thank You Friend!',
                     caption: 'I just want to say thank you',
