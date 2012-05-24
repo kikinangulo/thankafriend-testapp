@@ -74,7 +74,7 @@
             FB.api('/me/friends', { limit: 10 }, function(response) {
                 if(response.data) {
                     $.each(response.data,function(index,friend) {
-                        $('#friends').append('<div id="' + friend.id  + '" class="span3"><img class="profile" src="http://graph.facebook.com/' + friend.id + '/picture" /><p>' + friend.name + '</p></div>');
+                        $('#friends').append('<div id="' + friend.id  + '" class="span3"><img class="profile" src="https://graph.facebook.com/' + friend.id + '/picture" /><p>' + friend.name + '</p></div>');
                     });
                 } else {
                     alert("Error!");
@@ -137,7 +137,7 @@
       <div class="row">
 
         <div class="span12">
-<script src='http://connect.facebook.net/en_US/all.js'></script>
+<script src='https://connect.facebook.net/en_US/all.js'></script>
 
 
           <p></p>
@@ -154,8 +154,8 @@
                 var userId = $(this).attr("id");
                 var obj = {
                     method: 'feed',
-                    link: 'http://fbtestapp.dev/index.php',
-                    picture: 'http://graph.facebook.com/' + userId + '/picture',
+                    link: 'https://high-leaf-9955.herokuapp.com/',
+                    picture: 'https://graph.facebook.com/' + userId + '/picture',
                     name: 'Thank You Friend!',
                     caption: 'I just want to say thank you',
                     description: 'I just want to say thank you'
