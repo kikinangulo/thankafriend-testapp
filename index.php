@@ -155,7 +155,7 @@
                 var obj = {
                     method: 'feed',
                     link: 'http://fbtestapp.dev/index.php',
-                    picture: 'http://graph.facebook.com/' + userId + '/picture',
+                    picture: '',
                     name: 'Thank You Friend!',
                     caption: 'I just want to say thank you',
                     description: 'I just want to say thank you'
