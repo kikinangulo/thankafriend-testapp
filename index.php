@@ -1,17 +1,4 @@
-<?php //
 
-require_once("facebook/facebook.php");
-
-  $config = array();
-  $config['appId'] = '390782660963770';
-  $config['secret'] = '378cc6340c90c1e0b4b10c498ff66120';
-  $config['fileUpload'] = false; // optional
-
-  $facebook = new Facebook($config);
-  
-  $user_id = $facebook->getUser();
-  
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
