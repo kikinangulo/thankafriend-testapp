@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -147,6 +146,7 @@
 
         </div><!--/span-->
       </div><!--/row-->
+      <button div="invite-friends" class="btn-success" value="Invite Your Friends" ></button>
       
     <script type="text/javascript">
         $(function(){ 
@@ -168,6 +168,20 @@
             }));
         });
     </script>
+    
+        <script type="text/javascript">
+        $(function(){ 
+            $("#invite-friends").live("click",(function() {
+                function sendRequestViaMultiFriendSelector() {
+                    FB.ui({method: 'apprequests',
+                        message: 'My Great Request',
+                    }, requestCallback);
+                }
+            }));
+        });
+    </script>
+    
+
 
       <hr>
 
