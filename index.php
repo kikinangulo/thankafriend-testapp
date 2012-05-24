@@ -73,7 +73,7 @@
             FB.api('/me/friends', { limit: 10 }, function(response) {
                 if(response.data) {
                     $.each(response.data,function(index,friend) {
-                        $('#friends').append('<div id="' + friend.id  + '" class="span3"><img class="profile" src="https://graph.facebook.com/' + friend.id + '/picture" /><p>' + friend.name + '</p></div>');
+                        $('#friends').append('<div id="' + friend.id  + '" class="span3"><img class="profile" alt="' + friend.name + '" src="https://graph.facebook.com/' + friend.id + '/picture" /><p>' + friend.name + '</p></div>');
                     });
                 } else {
                     alert("Error!");
@@ -149,21 +149,21 @@
       <button id="invite" class="btn-success">Invite Your Friends</button>
       
     <script type="text/javascript">
-        $(function(){ 
-            $(".profile").on("click", function(event) {
-                var userId = $(this).attr("id");
+        $(function(){
+            $(".profile").live("click", function(){
+                var username = $(this).attr("alt");
                 var obj = {
                     method: 'feed',
                     link: 'https://apps.facebook.com/mbdevapp/',
                     picture: '',
-                    name: 'Thank You Friend!',
+                    name: 'Thank You ' + username + '!',
                     caption: 'I just want to say thank you',
                     description: 'I just want to say thank you'
+                    
                 };
                 function callback(response) {
                     document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
                 }
-
                 FB.ui(obj, callback);
             });
         });
