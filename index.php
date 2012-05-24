@@ -13,7 +13,6 @@
 
     $user_id = $facebook->getUser();
     if ($user_id) {
-        print "a";
         try {
             // Fetch the viewer's basic information
             $basic = $facebook->api('/me');
@@ -28,12 +27,10 @@
 
         // This fetches 10 of your friends.
         $friends = idx($facebook->api('/me/friends?limit=10'), 'data', array());
-        print_r ($friends);
         foreach ($friends as $friend) {
             $id = idx($friend, 'id');
             $url = 'https://graph.facebook.com/' . $id . '/picture';
             $img = '/userimages/' . $id . '.jpg';
-            echo 'https://graph.facebook.com/' . $id . '/picture';
             if (file_put_contents($img, file_get_contents($url))) {print "Success";}
         }
 
