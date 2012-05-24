@@ -146,7 +146,7 @@
 
         </div><!--/span-->
       </div><!--/row-->
-      <button id="invite-friends" class="btn-success">Invite Your Friends</button>
+      <button id="invite" class="btn-success">Invite Your Friends</button>
       
     <script type="text/javascript">
         $(function(){ 
@@ -171,12 +171,16 @@
     
         <script type="text/javascript">
         $(function(){ 
-            $("#invite-friends").on("click", function(event) {
-                function sendRequestViaMultiFriendSelector() {
-                    FB.ui({method: 'apprequests',
-                        message: 'My Great Request',
-                    }, requestCallback);
+            $("#invite").on("click", function(event) {
+                
+
+                FB.ui({method: 'apprequests',
+                    message: 'My Great Request'
+                }, requestCallback);
+                function requestCallback(response) {
+                    // Handle callback here
                 }
+
             });
         });
     </script>
