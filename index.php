@@ -102,12 +102,7 @@
         FB.Event.subscribe('auth.statusChange', function(response) {
           if (response.authResponse) {
             // user has auth'd your app and is logged into Facebook
-            FB.api('/me', function(me){
-              if (me.name) {
-                document.getElementById('auth-displayname').innerHTML = me.name;
-                document.getElementById('auth-displayname').innerHTML = me.name;
-              }
-            })
+
             
             FB.api('/me/friends', { limit: 10 }, function(response) {
                 if(response.data) {
@@ -119,55 +114,14 @@
                 }
             });
             
-            document.getElementById('auth-loggedout').style.display = 'none';
-            document.getElementById('auth-loggedin').style.display = 'block';
+
             
           } else {
-            // user has not auth'd your app, or is not logged into Facebook
-            document.getElementById('auth-loggedout').style.display = 'block';
-            document.getElementById('auth-loggedin').style.display = 'none';
+
           }
         });
-
-        // respond to clicks on the login and logout links
-        document.getElementById('auth-loginlink').addEventListener('click', function(){
-          FB.login();
-        });
-        document.getElementById('auth-logoutlink').addEventListener('click', function(){
-          FB.logout();
-        }); 
       } 
     </script>
-
-
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          Test FB Page
-          <div class="nav-collapse">
-            <ul class="nav">
-
-            </ul>
-            <p class="navbar-text pull-right">    
-      			<div id="auth-status" style="padding-top:11px;">
-        			<div id="auth-loggedout">
-          				<a href="#" id="auth-loginlink">Login</a>
-        			</div>
-        			<div id="auth-loggedin" style="display:none; color:#ffffff;">
-          				Hi, <span id="auth-displayname"></span>  
-        				(<a href="#" id="auth-logoutlink">logout</a>)
-      				</div>
-    			</div>
-    		</p>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
 
     <div class="container-fluid">
     	<h2>Display 10 random friends and onclick give dialog to thank them</h2>
