@@ -2,7 +2,7 @@
 
    $app_id = "390782660963770";
    $app_secret = "378cc6340c90c1e0b4b10c498ff66120";
-   $my_url = "https://high-leaf-9955.herokuapp.com/";
+   $my_url = "https://apps.facebook.com/mbdevapp/";
 
    session_start();
    $code = $_REQUEST["code"];
@@ -29,10 +29,10 @@
        . $params['access_token'];
 
      $user = json_decode(file_get_contents($graph_url));
-     echo("Hello " . $user->name);
+
    }
    else {
-     echo("The state does not match. You may be a victim of CSRF.");
+
    }
 
  ?>
