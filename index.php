@@ -123,8 +123,8 @@
       } 
     </script>
 
-    <div class="container-fluid">
-    	<h2>Display 10 random friends and onclick give dialog to thank them</h2>
+    <div class="container">
+    	<h2>Display 10 random friends and on click give dialog to thank them</h2>
     	<p></p>
       <div class="row">
 
