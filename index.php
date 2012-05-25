@@ -107,7 +107,7 @@
             FB.api('/me/friends', { limit: 10 }, function(response) {
                 if(response.data) {
                     $.each(response.data,function(index,friend) {
-                        $('#friends').append('<div id="' + friend.id  + '" class="span3"><img class="profile" alt="' + friend.name + '" src="https://graph.facebook.com/' + friend.id + '/picture" /><p>' + friend.name + '</p></div>');
+                        $('#friends').append('<div id="' + friend.id  + '" class="span2"><img class="profile" alt="' + friend.name + '" src="https://graph.facebook.com/' + friend.id + '/picture" /><p>' + friend.name + '</p></div>');
                     });
                 } else {
                     alert("Error!");
@@ -128,7 +128,7 @@
     	<p></p>
       <div class="row">
 
-        <div class="span12">
+        <div class="span10">
 <script src='https://connect.facebook.net/en_US/all.js'></script>
 
 
