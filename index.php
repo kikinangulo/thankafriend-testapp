@@ -56,6 +56,9 @@
       .sidebar-nav {
         padding: 9px 0;
       }
+      .cursor {
+          cursor: pointer;
+      }
     </style>
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -107,7 +110,7 @@
             FB.api('/me/friends', { limit: 10 }, function(response) {
                 if(response.data) {
                     $.each(response.data,function(index,friend) {
-                        $('#friends').append('<div id="' + friend.id  + '" class="span2"><img class="profile" alt="' + friend.name + '" src="https://graph.facebook.com/' + friend.id + '/picture" /><p>' + friend.name + '</p></div>');
+                        $('#friends').append('<div id="' + friend.id  + '" class="span2 cursor"><img class="profile" alt="' + friend.name + '" src="https://graph.facebook.com/' + friend.id + '/picture" /><p>' + friend.name + '</p></div>');
                     });
                 } else {
                     alert("Error!");
